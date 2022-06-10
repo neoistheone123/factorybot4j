@@ -112,7 +112,7 @@ public class FactoryGirl {
 
     /**
      * Find factory by name
-     * @param name
+     * @param name factory name
      * @return Factory definition
      * @throws IllegalArgumentException when name is blank or name is not found
      */

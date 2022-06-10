@@ -33,7 +33,7 @@ public class Factory<ObjectType> {
 
        return invokeAfterCallbacks(FactoryGirlOperation.BUILD, product);
     }
-
+    
     @Getter(AccessLevel.PRIVATE)
     private final Map<String, KeyValuePair> objectFields = new HashMap<>();
 
@@ -46,10 +46,20 @@ public class Factory<ObjectType> {
     @Getter(AccessLevel.PRIVATE)
     private final Multimap<FactoryGirlOperation, AfterCallback> afterCallbacks = LinkedListMultimap.create();
 
+    /**
+     * Used for chaining the DSL
+     * @return
+     */
     public Factory<ObjectType> and(){
         return this;
     }
 
+    /**
+     *
+     * @param name
+     * @return
+     * @throws IOException
+     */
     protected Set<Class> findClasses(String name) throws IOException {
         return ClassPath.from(getClass().getClassLoader()).getTopLevelClassesRecursive("factorygirl4j")
                 .stream().filter(info -> info.getSimpleName().equalsIgnoreCase(name))
@@ -57,6 +67,16 @@ public class Factory<ObjectType> {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     *
+     * @return
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     * @throws IOException
+     * @throws NoSuchFieldException
+     * @throws InvocationTargetException
+     * @throws NoSuchMethodException
+     */
     protected ObjectType buildWithName() throws IllegalAccessException, InstantiationException,
             IOException, NoSuchFieldException, InvocationTargetException, NoSuchMethodException {
         final Set<Class> classes = findClasses(name);
@@ -70,13 +90,35 @@ public class Factory<ObjectType> {
         return buildWithType(classes.stream().findFirst().get());
     }
 
+    /**
+     *
+     * @param type
+     * @return
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     * @throws IOException
+     * @throws NoSuchFieldException
+     * @throws InvocationTargetException
+     * @throws NoSuchMethodException
+     */
     @SuppressWarnings("unchecked")
-    public ObjectType buildWithType(Class type) throws IllegalAccessException, InstantiationException,
+    ObjectType buildWithType(Class type) throws IllegalAccessException, InstantiationException,
             IOException, NoSuchFieldException, InvocationTargetException, NoSuchMethodException {
         if(!objectType.isPresent()) objectType = Optional.of(type);
         return populateObject((ObjectType) type.newInstance());
     }
 
+    /**
+     * Populate an object
+     * @param target
+     * @return an object of type ObjectType
+     * @throws IllegalAccessException
+     * @throws IOException
+     * @throws InstantiationException
+     * @throws NoSuchFieldException
+     * @throws InvocationTargetException
+     * @throws NoSuchMethodException
+     */
     protected ObjectType populateObject(ObjectType target) throws IllegalAccessException, IOException,
             InstantiationException, NoSuchFieldException, InvocationTargetException, NoSuchMethodException {
         for(KeyValuePair pair: getObjectFields().values()) {

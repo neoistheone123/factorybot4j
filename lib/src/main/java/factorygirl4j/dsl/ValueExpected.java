@@ -15,7 +15,7 @@ public class ValueExpected<ObjectType> {
     /**
      * Provide a key value
      * @param value key value
-     * @return Factory<ObjectType>
+     * @return Factory&lt;ObjectType&gt;
      */
     public Factory<ObjectType> value(Object value){
         keyValuePair.setValue(value);

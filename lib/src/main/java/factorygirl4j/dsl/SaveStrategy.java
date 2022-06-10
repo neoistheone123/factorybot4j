@@ -9,7 +9,7 @@ public interface SaveStrategy<ObjectType> {
 
     /**
      * Save an object
-     * @param object
+     * @param object object to save
      * @return the saved object
      */
     ObjectType save(ObjectType object);
