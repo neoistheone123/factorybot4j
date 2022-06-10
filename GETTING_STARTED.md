@@ -11,25 +11,24 @@ ___
 ___
 Each factory has a name and a set of attributes. The name is used to guess the class of the object by default, but it's possible to explicitly specify it:
 
-
-#### This will guess the User class
-`
+```
+// This will guess the User class
 FactoryGirl.define(
    factory("user")
       .key("firstName").value("John")
       .key("lastName").value("Doe")
 )
-`
+```
 
-#### This will use the User class (Admin would have been guessed)
-`
+```
+// This will use the User class (Admin would have been guessed)
 FactoryGirl.define(
    factory("admin", User.class)
       .key("firstName").value("Admin")
       .key("lastName").value("User")
       .key("admin").value(true)
 )
-`
+```
 
 It is highly recommended that you have one factory for each class that provides the simplest set of attributes necessary to create an instance of that class.
 

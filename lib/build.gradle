@@ -16,7 +16,7 @@ repositories {
     mavenCentral()
 }
 
-group = 'factorygirl4j'
+group = 'io.github.neoistheone123'
 version = '1.0.0'
 
 dependencies {
