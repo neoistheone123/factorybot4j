@@ -12,15 +12,3 @@ See FactoryIntegrationTest in the test module for code examples of using factori
 ## Supported Java versions
 ___
 Supports JDK 1.8+
-
-## Contributing
-___
-Please see [CONTRIBUTING.md].
-
-factorygirl4j was originally written by Neo. Looking forward to improvements and bugfixes from the open-source community.
-
-[CONTRIBUTING.MD]: https://github.com/neoistheone123/factorygirl4j/blob/master/CONTRIBUTING.md
-
-## License
-___
-factorygirl4j is Copyright © 2022 Neo. It is free software, and may be redistributed.

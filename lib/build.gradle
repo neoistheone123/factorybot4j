@@ -11,15 +11,20 @@ plugins {
     id 'java-library'
     id "io.freefair.lombok" version "6.4.3"
     id 'maven-publish'
-    id 'signing'
 }
 
 repositories {
-    mavenCentral()
+    /*
+    What happens in Paychex, stays in Paychex
+     */
+    maven { url 'http://repository.paychex.com:8081/artifactory/public'; allowInsecureProtocol = true  }
+    maven { url 'http://repository.paychex.com:8081/artifactory/release'; allowInsecureProtocol = true  }
+    maven { url 'http://repository.paychex.com:8081/artifactory/confluent-io-remote'; allowInsecureProtocol = true  }
+    maven { url 'http://repository.paychex.com:8081/artifactory/maven'; allowInsecureProtocol = true  }
 }
 
 
-group = 'io.github.neoistheone123'
+group = 'com.paychex'
 version = '1.0.0'
 
 dependencies {
@@ -55,41 +60,19 @@ java {
     withSourcesJar()
 }
 
+/*
+Used for publishing to Paychex Maven repo
+ */
 publishing {
     publications {
         mavenJava(MavenPublication) {
+            groupId "$group"
+            artifactId "$name"
+            version "$version"
             from components.java
-
-            pom {
-                name = 'factorygirl4j'
-                // optionally artifactId can be defined here
-                description = 'Java adaptation of Ruby\'s factory_girl.'
-                url = 'https://github.com/neoistheone123/factorygirl4j'
-
-                scm {
-                    connection = 'scm:git:https://github.com/neoistheone123/factorygirl4j.git'
-                    developerConnection = 'scm:git:https://github.com/neoistheone123/factorygirl4j.git'
-                    url = 'https://github.com/neoistheone123/factorygirl4j.git'
-                }
-            }
         }
     }
-
     repositories {
-        maven {
-            def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-            def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-
-            credentials {
-                username = ossrhUsername
-                password = ossrhPassword
-            }
-
-            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-        }
+        maven { url 'http://repository.paychex.com:8081/artifactory/prerelease' }
     }
-}
-
-signing {
-    sign publishing.publications.mavenJava
 }
