@@ -1,1 +1,1 @@
-factorygirl4j.junit5.LoadFactoryGirlExtension
+org.paychex.commons.factorychex.junit5.LoadFactoryChexExtension

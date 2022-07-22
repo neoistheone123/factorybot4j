@@ -19,5 +19,5 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'factorygirl4j'
+rootProject.name = 'factorychex'
 include('lib')
