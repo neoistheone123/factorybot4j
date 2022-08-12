@@ -23,7 +23,7 @@ repositories {
     maven { url 'http://repository.paychex.com:8081/artifactory/maven'; allowInsecureProtocol = true  }
 }
 
-
+sourceCompatibility = JavaVersion.VERSION_1_8
 group = 'com.paychex'
 version = '1.0.0'
 
