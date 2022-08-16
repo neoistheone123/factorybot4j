@@ -19,7 +19,7 @@ public class FactoryBot {
     private static final String FACTORY_ALREADY_EXISTS_ERROR_MSG_TEMPLATE = "factory named %s already exists";
     private static final String FACTORY_DOES_NOT_EXIST_ERROR_MSG_TEMPLATE = "factory named %s does not exist";
     private static final String FACTORY_NAME_IS_BLANK_ERROR_MSG = "factory name is blank";
-    private static final String BASE_PACKAGE_FOR_FACTORIES = "org.paychex.commons.factorychex.factories";
+    private static final String BASE_PACKAGE_FOR_FACTORIES = "factorybot.factories";
     private static final Map<String, Factory> factories = new ConcurrentHashMap<>();
 
     /**

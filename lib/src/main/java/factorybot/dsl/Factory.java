@@ -26,7 +26,7 @@ public class Factory<ObjectType> {
     private static final String NO_CLASSES_FOUND_ERROR_MSG_TEMPLATE = "could not find any classes for name %s";
     private final @NonNull String name;
 
-    private static final String ROOT_PKG_NAME = "org.paychex.commons.factorychex";
+    private static final String ROOT_PKG_NAME = "factorybot";
 
     private Optional<Class> objectType = Optional.empty();
 
