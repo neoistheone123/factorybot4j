@@ -14,17 +14,11 @@ plugins {
 }
 
 repositories {
-    /*
-    What happens in Paychex, stays in Paychex
-     */
-    maven { url 'http://repository.paychex.com:8081/artifactory/public'; allowInsecureProtocol = true  }
-    maven { url 'http://repository.paychex.com:8081/artifactory/release'; allowInsecureProtocol = true  }
-    maven { url 'http://repository.paychex.com:8081/artifactory/confluent-io-remote'; allowInsecureProtocol = true  }
-    maven { url 'http://repository.paychex.com:8081/artifactory/maven'; allowInsecureProtocol = true  }
+   mavenLocal()
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
-group = 'com.paychex'
+group = 'factorybot4j'
 version = '1.0.0'
 
 dependencies {
@@ -60,9 +54,6 @@ java {
     withSourcesJar()
 }
 
-/*
-Used for publishing to Paychex Maven repo
- */
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -73,6 +64,6 @@ publishing {
         }
     }
     repositories {
-        maven { url 'http://repository.paychex.com:8081/artifactory/prerelease' }
+        maven { url '<TBD>' }
     }
 }

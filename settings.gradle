@@ -6,18 +6,5 @@
  * Detailed information about configuring a multi-project build in Gradle can be found
  * in the user manual at https://docs.gradle.org/7.4.2/userguide/multi_project_builds.html
  */
-
-/*
-What happens in Paychex, stays in Paychex
-*/
-pluginManagement {
-    repositories {
-        maven { url 'http://repository.paychex.com:8081/artifactory/public'; allowInsecureProtocol = true  }
-        maven { url 'http://repository.paychex.com:8081/artifactory/release'; allowInsecureProtocol = true  }
-        maven { url 'http://repository.paychex.com:8081/artifactory/confluent-io-remote'; allowInsecureProtocol = true  }
-        maven { url 'http://repository.paychex.com:8081/artifactory/maven'; allowInsecureProtocol = true  }
-    }
-}
-
-rootProject.name = 'factorychex'
+rootProject.name = 'factorybot4j'
 include('lib')
