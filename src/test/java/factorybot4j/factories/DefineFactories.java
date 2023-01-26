@@ -6,8 +6,8 @@ import factorybot4j.dsl.FactoryBot;
 
 import static factorybot4j.dsl.DefineFactoryWithNameAndClass.factory;
 import static factorybot4j.dsl.DefineFactoryWithNameOnly.factory;
-import static factorybot4j.dsl.FactoryChexOperation.BUILD;
-import static factorybot4j.dsl.FactoryChexOperation.CREATE;
+import static factorybot4j.dsl.FactoryBotOperation.BUILD;
+import static factorybot4j.dsl.FactoryBotOperation.CREATE;
 import static factorybot4j.dsl.SpecifyFactoryName.factoryName;
 import static factorybot4j.dsl.StartKeyValuePairs.with;
 

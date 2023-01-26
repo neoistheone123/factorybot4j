@@ -26,14 +26,14 @@ public class Factory<ObjectType> {
     private static final String NO_CLASSES_FOUND_ERROR_MSG_TEMPLATE = "could not find any classes for name %s";
     private final @NonNull String name;
 
-    private static final String ROOT_PKG_NAME = "factorybot";
+    private static final String ROOT_PKG_NAME = "factorybot4j";
 
     private Optional<Class> objectType = Optional.empty();
 
     public ObjectType build() throws IllegalAccessException, InstantiationException, IOException, NoSuchFieldException, InvocationTargetException, NoSuchMethodException {
        final ObjectType product = objectType.isPresent() ? buildWithType(objectType.get()) : buildWithName();
 
-       return invokeAfterCallbacks(FactoryChexOperation.BUILD, product);
+       return invokeAfterCallbacks(FactoryBotOperation.BUILD, product);
     }
     
     @Getter(AccessLevel.PRIVATE)
@@ -46,7 +46,7 @@ public class Factory<ObjectType> {
     private final Map<String, KeyValuePair> transientFields = new HashMap<>();
 
     @Getter(AccessLevel.PRIVATE)
-    private final Multimap<FactoryChexOperation, AfterCallback> afterCallbacks = LinkedListMultimap.create();
+    private final Multimap<FactoryBotOperation, AfterCallback> afterCallbacks = LinkedListMultimap.create();
 
     /**
      * Used for chaining the DSL
@@ -209,7 +209,7 @@ public class Factory<ObjectType> {
         return this;
     }
 
-    public Factory<ObjectType> after(FactoryChexOperation operation, AfterCallback<ObjectType> callback){
+    public Factory<ObjectType> after(FactoryBotOperation operation, AfterCallback<ObjectType> callback){
         afterCallbacks.put(operation, callback);
         return this;
     }
@@ -241,7 +241,7 @@ public class Factory<ObjectType> {
     }
 
     @SuppressWarnings("unchecked")
-    ObjectType invokeAfterCallbacks(FactoryChexOperation operation, ObjectType product){
+    ObjectType invokeAfterCallbacks(FactoryBotOperation operation, ObjectType product){
         afterCallbacks.get(operation).forEach(callback -> callback.call(product, this));
         return product;
     }
@@ -273,11 +273,11 @@ public class Factory<ObjectType> {
     ObjectType create(SaveStrategy<ObjectType> saveStrategy, KeyValuePairs keyValuePairs)
             throws IOException, NoSuchFieldException, InvocationTargetException, IllegalAccessException,
             InstantiationException, NoSuchMethodException {
-        return this.invokeAfterCallbacks(FactoryChexOperation.CREATE, saveStrategy.save(this.build(keyValuePairs)));
+        return this.invokeAfterCallbacks(FactoryBotOperation.CREATE, saveStrategy.save(this.build(keyValuePairs)));
     }
 
     ObjectType create(SaveStrategy<ObjectType> saveStrategy) throws IOException, NoSuchFieldException,
             InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
-        return this.invokeAfterCallbacks(FactoryChexOperation.CREATE, saveStrategy.save(this.build()));
+        return this.invokeAfterCallbacks(FactoryBotOperation.CREATE, saveStrategy.save(this.build()));
     }
 }

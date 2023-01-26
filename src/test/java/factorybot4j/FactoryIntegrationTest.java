@@ -4,7 +4,7 @@ import factorybot4j.domain.Post;
 import factorybot4j.dsl.FactoryBot;
 import factorybot4j.dsl.SaveStrategy;
 import factorybot4j.dsl.StartKeyValuePairs;
-import factorybot4j.exception.FactoryChexException;
+import factorybot4j.exception.FactoryBotException;
 import factorybot4j.domain.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -53,7 +53,7 @@ public class FactoryIntegrationTest {
     @Test
     public void testWithFactoryNameOnlyFactoryDoesNotExist(){
         // When
-        final FactoryChexException top = assertThrows(FactoryChexException.class,
+        final FactoryBotException top = assertThrows(FactoryBotException.class,
                 () -> FactoryBot.build("somefactoryname"));
 
         assertThat(top.getCause().getMessage(), is("factory named somefactoryname does not exist"));
@@ -62,7 +62,7 @@ public class FactoryIntegrationTest {
     @Test
     public void testWithFactoryNameOnlyAmbiguousType(){
         // When
-        final FactoryChexException top = assertThrows(FactoryChexException.class,
+        final FactoryBotException top = assertThrows(FactoryBotException.class,
                 () -> FactoryBot.build("otherclass"));
 
         assertThat(top.getCause(), is(instanceOf(IllegalArgumentException.class)));

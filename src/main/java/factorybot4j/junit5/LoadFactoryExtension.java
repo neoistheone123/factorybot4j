@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.extension.ExtensionContext.Namespace.GLOBAL;
 /**
  * JUnit5 extension to load factories before ALL tests are started
  */
-public class LoadFactoryChexExtension implements BeforeAllCallback, ExtensionContext.Store.CloseableResource {
+public class LoadFactoryExtension implements BeforeAllCallback, ExtensionContext.Store.CloseableResource {
     private static boolean started = false;
 
     @Override
@@ -22,7 +22,7 @@ public class LoadFactoryChexExtension implements BeforeAllCallback, ExtensionCon
             FactoryBot.findDefinitions();
 
             // The following line registers a callback hook when the root test context is shut down
-            context.getRoot().getStore(GLOBAL).put(LoadFactoryChexExtension.class.getSimpleName(), this);
+            context.getRoot().getStore(GLOBAL).put(LoadFactoryExtension.class.getSimpleName(), this);
         }
     }
 

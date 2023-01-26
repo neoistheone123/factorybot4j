@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @RequiredArgsConstructor
 @ToString
-public enum FactoryChexOperation {
+public enum FactoryBotOperation {
     BUILD("build"), CREATE("create");
 
     private @NonNull final String label;

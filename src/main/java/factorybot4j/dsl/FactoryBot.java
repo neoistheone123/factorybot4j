@@ -1,7 +1,7 @@
 package factorybot4j.dsl;
 
 import com.google.common.reflect.ClassPath;
-import factorybot4j.exception.FactoryChexException;
+import factorybot4j.exception.FactoryBotException;
 import lombok.Value;
 import org.apache.commons.lang3.StringUtils;
 
@@ -19,7 +19,7 @@ public class FactoryBot {
     private static final String FACTORY_ALREADY_EXISTS_ERROR_MSG_TEMPLATE = "factory named %s already exists";
     private static final String FACTORY_DOES_NOT_EXIST_ERROR_MSG_TEMPLATE = "factory named %s does not exist";
     private static final String FACTORY_NAME_IS_BLANK_ERROR_MSG = "factory name is blank";
-    private static final String BASE_PACKAGE_FOR_FACTORIES = "factorybot.factories";
+    private static final String BASE_PACKAGE_FOR_FACTORIES = "factorybot4j.factories";
     private static final Map<String, Factory> factories = new ConcurrentHashMap<>();
 
     /**
@@ -35,7 +35,7 @@ public class FactoryBot {
             factories.put(factory.getName(), factory);
         }
         catch (Exception exception){
-            throw new FactoryChexException(exception);
+            throw new FactoryBotException(exception);
         }
     }
 
@@ -51,7 +51,7 @@ public class FactoryBot {
             return (ObjectType)findFactory(name).build();
         }
         catch (Exception exception){
-            throw new FactoryChexException(exception);
+            throw new FactoryBotException(exception);
         }
     }
 
@@ -68,7 +68,7 @@ public class FactoryBot {
             return (ObjectType)findFactory(name).build(keyValuePairs);
         }
         catch (Exception ex){
-            throw new FactoryChexException(ex);
+            throw new FactoryBotException(ex);
         }
     }
 
@@ -85,7 +85,7 @@ public class FactoryBot {
             return (ObjectType)findFactory(name).create(saveStrategy);
         }
         catch (Exception ex){
-            throw new FactoryChexException(ex);
+            throw new FactoryBotException(ex);
         }
     }
 
@@ -105,7 +105,7 @@ public class FactoryBot {
             return (ObjectType)findFactory(name).create(saveStrategy, keyValuePairs);
         }
         catch (Exception ex){
-            throw new FactoryChexException(ex);
+            throw new FactoryBotException(ex);
         }
     }
 
@@ -128,7 +128,7 @@ public class FactoryBot {
 
     /**
      * Find and initialize factories
-     * @throws FactoryChexException
+     * @throws FactoryBotException
      */
     public static void findDefinitions() {
         try {
@@ -140,7 +140,7 @@ public class FactoryBot {
             for(Class clazz: clazzes) clazz.newInstance();
         }
         catch (Exception ex){
-            throw new FactoryChexException(ex);
+            throw new FactoryBotException(ex);
         }
     }
 }
